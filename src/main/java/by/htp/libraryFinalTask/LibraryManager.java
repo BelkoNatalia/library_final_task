@@ -166,6 +166,7 @@ public class LibraryManager {
 	}
 
 	private void showBooksCatalog() {
+		
 		System.out.println("--showBooksCatalog will be implemented");
 		showMainReaderMenu();
 	}
