@@ -1,66 +1,66 @@
 package by.htp.libraryFinalTask.entity;
 
 public class Book {
-	private int idBook;
+	private int shifrBook;
 	private String title;
-	private Autor autor;
-	private int idAutor;
-	private User user; 
+	private String shifrAutor;
+	private String shifrOwner;//User
 	
-	public Book() {
-		super();
-	}
-	public Book(String title, Autor autor) {
-		super();
+	public Book(int shifrBook, String title, String shifrAutor, String shifrOwner) {
+		this.shifrBook = shifrBook;
 		this.title = title;
-		this.autor = autor;
+		this.shifrAutor = shifrAutor;
+		this.shifrOwner = shifrOwner;
 	}
-	
+
+	public int getShifrBook() {
+		return shifrBook;
+	}
+
+	public void setShifrBook(int shifrBook) {
+		this.shifrBook = shifrBook;
+	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public Autor getAutor() {
-		return autor;
+
+	public String getShifrAutor() {
+		return shifrAutor;
 	}
-	public void setAutor(Autor autor) {
-		this.autor = autor;
+
+	public void setShifrAutor(String shifrAutor) {
+		this.shifrAutor = shifrAutor;
 	}
-	public int getIdAutor() {
-		return idAutor;
+
+	public String getShifrOwner() {
+		return shifrOwner;
 	}
-	public void setIdAutor(int idAutor) {
-		this.idAutor = idAutor;
+
+	public void setShifrOwner(String shifrOwner) {
+		this.shifrOwner = shifrOwner;
 	}
-	public int getIdBook() {
-		return idBook;
-	}
-	public void setIdBook(int idBook) {
-		this.idBook = idBook;
-	}
-	
-	
-	
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
+
 	@Override
 	public String toString() {
-		return "Book [title=" + title + ", autor=" + autor + "]";
+		return "Book [shifrBook=" + shifrBook + ", title=" + title + ", shifrAutor=" + shifrAutor + ", shifrOwner=" + shifrOwner + "]";
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((autor == null) ? 0 : autor.hashCode());
+		result = prime * result + ((shifrAutor == null) ? 0 : shifrAutor.hashCode());
+		result = prime * result + shifrBook;
+		result = prime * result + ((shifrOwner == null) ? 0 : shifrOwner.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -70,10 +70,17 @@ public class Book {
 		if (getClass() != obj.getClass())
 			return false;
 		Book other = (Book) obj;
-		if (autor == null) {
-			if (other.autor != null)
+		if (shifrAutor == null) {
+			if (other.shifrAutor != null)
 				return false;
-		} else if (!autor.equals(other.autor))
+		} else if (!shifrAutor.equals(other.shifrAutor))
+			return false;
+		if (shifrBook != other.shifrBook)
+			return false;
+		if (shifrOwner == null) {
+			if (other.shifrOwner != null)
+				return false;
+		} else if (!shifrOwner.equals(other.shifrOwner))
 			return false;
 		if (title == null) {
 			if (other.title != null)
@@ -85,6 +92,4 @@ public class Book {
 	
 	
 	
-
-
 }
