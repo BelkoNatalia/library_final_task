@@ -6,14 +6,14 @@ import by.htp.libraryFinalTask.entity.Book;
 
 
 public interface BookDao {
-	Book getBookById(int id);
+	Book getBookByShifr(String shifrBook);
 
 	List<Book> getBookCatalog();
 
 	void addBook(Book book);
 
-	void deleteBookById(int id);
+	void deleteBookByShifr(String shifrBook);
 
-	void updateBookOwner(int idBook, int idUser);
+	void updateBookOwner(String shifrBook, String shifrUser);
 
 }

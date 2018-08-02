@@ -1,9 +1,16 @@
 package by.htp.libraryFinalTask;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import by.htp.libraryFinalTask.dao.BookDao;
+import by.htp.libraryFinalTask.dao.impl.BookDaoBdImpl;
+import by.htp.libraryFinalTask.entity.Book;
 
 public class LibraryManager {
 	Scanner scaner = new Scanner(System.in);
+	BookDao bookDao = new BookDaoBdImpl();
 
 	public void showMainMenu() {
 		System.out.println("Enter the item number, please.");
@@ -81,8 +88,8 @@ public class LibraryManager {
 		case 7:
 			showReportReadersReadMoreTwoBooks();
 			showMainLibrarianMenu();
-			break;		
-			
+			break;
+
 		case 8:
 			showMainMenu();
 			break;
@@ -116,22 +123,38 @@ public class LibraryManager {
 	}
 
 	private void addNewBook() {
-		System.out.println("--addNewBook will be implemented");
+		System.out.println("Input shifr of book");
+		String shifrBook = scaner.next();
+		System.out.println("Input title of book");
+		String titleBook = scaner.next();
+		System.out.println("Input name autor of book");
+		String nameAutor = scaner.next();
+		System.out.println("Input surname autor of book");
+		String surnameAutor = scaner.next();
+		System.out.println("Input birthdate of autor (use format:dd-mm-yyyy");
+		String birthdateAutor = scaner.next();
+		System.out.println("Input shifr of autor");
+		String shifrAutor = scaner.next();
+		Book book = new Book(shifrBook, titleBook, shifrAutor, "", "yes");
+
+		bookDao.addBook(book);
+		//update table autors
+		
+		System.out.println("Book was added");
 	}
 
 	private void addReader() {
 		System.out.println("--addReader will be implemented");
-		
+
 	}
 
 	public void showReaderLoginMenu() {
 		System.out.println("Enter the libraryTicketNumber");
-		int libraryTicketNumber = scaner.nextInt();
+		String libraryTicketNumber = scaner.next();
 
 		System.out.println("Enter the readerPassword");
-		int readerPassword = scaner.nextInt();
-		
-		
+		String readerPassword = scaner.next();
+
 	}
 
 	private void showMainReaderMenu() {
@@ -159,15 +182,23 @@ public class LibraryManager {
 
 	}
 
-	private void showBookById() {
-		System.out.println("--showBookById will be implemented");
+	private Book showBookById() {
+		System.out.println("Input books shifr");
+		String shifrBook = scaner.next();
+		Book book = null;
+		book = bookDao.getBookByShifr(shifrBook);
+		System.out.println(book);
 		showMainReaderMenu();
 
+		return book;
 	}
 
 	private void showBooksCatalog() {
-		
-		System.out.println("--showBooksCatalog will be implemented");
+		List<Book> catalogBooks = new ArrayList<>();
+		catalogBooks = bookDao.getBookCatalog();
+		for (int i = 0; i < catalogBooks.size(); i++) {
+			System.out.println(catalogBooks.get(i));
+		}
 		showMainReaderMenu();
 	}
 
