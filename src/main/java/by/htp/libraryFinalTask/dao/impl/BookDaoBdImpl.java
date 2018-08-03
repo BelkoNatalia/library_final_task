@@ -22,7 +22,7 @@ public class BookDaoBdImpl implements BookDao {
 	private static final String SELECT_ALL_BOOK = "SELECT * FROM books";
 	private static final String INSERT_BOOK = "INSERT INTO books(shifr_book, title, shifr_autor, shifr_owner, avialable) VALUES (?, ?, ?, ?, ?)";
 	private static final String DELETE_BOOK_BY_SHIFR = "DELETE FROM books WHERE shifr_book = ?";
-	private static final String UPDATE_BOOK_OWNER = "UPDATE books SET shifr_owner = ? WHERE shifr_book = ?";
+	private static final String UPDATE_BOOK = "UPDATE books SET title= ?, shifr_autor= ?, shifr_owner= ?, avialable= ? WHERE shifr_book = ?";
 	
 	@Override
 	public Book getBookByShifr(String shifrBook) {
@@ -94,12 +94,21 @@ public class BookDaoBdImpl implements BookDao {
 	}
 
 	@Override
-	public void updateBookOwner(String shifrBook, String shifrUser) {
-
+	public void updateBook(Book book) {
+		
 		try (Connection conn = DriverManager.getConnection(getUrl(), getLogin(), getPass())) {
-			PreparedStatement ps = conn.prepareStatement(UPDATE_BOOK_OWNER);
-			ps.setString(1, shifrUser);
-			ps.setString(2, shifrBook);
+			PreparedStatement ps = conn.prepareStatement(UPDATE_BOOK);
+			String title = book.getTitle();
+			ps.setString(1, title);
+			String shifrAutor = book.getShifrAutor();
+			ps.setString(2, shifrAutor);
+			String shifrOwner = book.getShifrOwner();
+			ps.setString(3, shifrOwner);
+			String avialable = book.getAvialable();
+			ps.setString(4, avialable);
+			String shifrBook = book.getShifrBook();
+			ps.setString(5, shifrBook);
+			
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

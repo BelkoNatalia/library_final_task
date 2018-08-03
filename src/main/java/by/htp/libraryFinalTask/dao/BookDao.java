@@ -14,6 +14,6 @@ public interface BookDao {
 
 	void deleteBookByShifr(String shifrBook);
 
-	void updateBookOwner(String shifrBook, String shifrUser);
+	void updateBook(Book book);
 
 }

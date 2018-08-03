@@ -5,12 +5,16 @@ import java.util.List;
 import java.util.Scanner;
 
 import by.htp.libraryFinalTask.dao.BookDao;
+import by.htp.libraryFinalTask.dao.UserDao;
 import by.htp.libraryFinalTask.dao.impl.BookDaoBdImpl;
+import by.htp.libraryFinalTask.dao.impl.UserDaoBdImpl;
 import by.htp.libraryFinalTask.entity.Book;
+import by.htp.libraryFinalTask.entity.User;
 
 public class LibraryManager {
 	Scanner scaner = new Scanner(System.in);
 	BookDao bookDao = new BookDaoBdImpl();
+	UserDao userDao = new UserDaoBdImpl();
 
 	public void showMainMenu() {
 		System.out.println("Enter the item number, please.");
@@ -115,11 +119,37 @@ public class LibraryManager {
 	}
 
 	private void takeAwayBook() {
-		System.out.println("--takeAwayBook will be implemented");
+		System.out.println("Input shifr of book");
+		String shifrBook = scaner.next();
+		Book book = new Book();
+		book = bookDao.getBookByShifr(shifrBook);
+		book.setShifrOwner("");
+		book.setAvialable("yes");
+		bookDao.updateBook(book);
+
 	}
 
 	private void giveAwayBook() {
-		System.out.println("--giveAwayBook will be implemented");
+		System.out.println("Input shifr of book");
+		String shifrBook = scaner.next();
+		Book book = new Book();
+		book = bookDao.getBookByShifr(shifrBook);
+
+		if (book.getAvialable().equals("yes")) {
+			System.out.println("Input shifr of owner");
+			String shifrOwner = scaner.next();
+			book.setAvialable("no");
+			book.setShifrOwner(shifrOwner);
+			bookDao.updateBook(book);
+
+			User user = new User();
+			user = userDao.getUserByShifr(shifrOwner);
+			int numbersBooks = user.getNumbersBooks();
+			numbersBooks++;
+			userDao.updateNumbersBooksByShifrUser(numbersBooks, shifrOwner);
+
+		}
+
 	}
 
 	private void addNewBook() {
@@ -138,13 +168,28 @@ public class LibraryManager {
 		Book book = new Book(shifrBook, titleBook, shifrAutor, "", "yes");
 
 		bookDao.addBook(book);
-		//update table autors
-		
+		// update table autors
+
 		System.out.println("Book was added");
 	}
 
 	private void addReader() {
-		System.out.println("--addReader will be implemented");
+		System.out.println("Input shifr of user");
+		String shifrUser = scaner.next();
+		System.out.println("Input name of user");
+		String name = scaner.next();
+		System.out.println("Input surname  of user");
+		String surname = scaner.next();
+		System.out.println("Input role of user");
+		String roleUser = scaner.next();
+		System.out.println("Input password of user");
+		String passwordUser = scaner.next();
+
+		User user = new User(0, roleUser, name, surname, passwordUser, shifrUser);
+
+		userDao.addUser(user);
+
+		System.out.println("User was added");
 
 	}
 

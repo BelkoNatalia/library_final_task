@@ -5,9 +5,20 @@ public class User {
 	private String role;
 	private String name;
 	private String surname;
-	private String identificationNumber;
 	private String password;
 	private String shifrUser;
+	
+	public User() {
+	}
+
+	public User(int numbersBooks, String role, String name, String surname, String password, String shifrUser) {
+		this.numbersBooks = numbersBooks;
+		this.role = role;
+		this.name = name;
+		this.surname = surname;
+		this.password = password;
+		this.shifrUser = shifrUser;
+	}
 
 	public int getNumbersBooks() {
 		return numbersBooks;
@@ -32,6 +43,7 @@ public class User {
 	public void setId(int id) {
 		this.numbersBooks = id;
 	}
+
 	public String getRole() {
 		return role;
 	}
@@ -56,13 +68,7 @@ public class User {
 		this.surname = surname;
 	}
 
-	public String getIdentificationNumber() {
-		return identificationNumber;
-	}
-
-	public void setIdentificationNumber(String identificationNumber) {
-		this.identificationNumber = identificationNumber;
-	}
+	
 
 	public String getPassword() {
 		return password;
@@ -74,14 +80,13 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [numbersBooks=" + numbersBooks + ", role=" + role + ", name=" + name + ", surname=" + surname + ", identificationNumber=" + identificationNumber + ", password=" + password + ", shifrUser=" + shifrUser + "]";
+		return "User [numbersBooks=" + numbersBooks + ", role=" + role + ", name=" + name + ", surname=" + surname + ", password=" + password + ", shifrUser=" + shifrUser + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((identificationNumber == null) ? 0 : identificationNumber.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + numbersBooks;
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
@@ -100,11 +105,6 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (identificationNumber == null) {
-			if (other.identificationNumber != null)
-				return false;
-		} else if (!identificationNumber.equals(other.identificationNumber))
-			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -134,6 +134,8 @@ public class User {
 			return false;
 		return true;
 	}
+
+
 	
 
 }
