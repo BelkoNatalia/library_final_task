@@ -71,7 +71,7 @@ public class UserDaoBdImpl implements UserDao{
 	private User buildUser(ResultSet rs) throws SQLException {
 		User user = new User();
 		String shifrUser = rs.getString("shifr_user");
-		user.setShifrUser(shifrUser);;
+		user.setShifrUser(shifrUser);
 		String nameUser = rs.getString("name_user");
 		user.setName(nameUser);
 		String surnameUser = rs.getString("surname_user");

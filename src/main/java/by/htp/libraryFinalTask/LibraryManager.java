@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import by.htp.libraryFinalTask.dao.AutorDao;
 import by.htp.libraryFinalTask.dao.BookDao;
 import by.htp.libraryFinalTask.dao.UserDao;
+import by.htp.libraryFinalTask.dao.impl.AutorDaoBdImpl;
 import by.htp.libraryFinalTask.dao.impl.BookDaoBdImpl;
 import by.htp.libraryFinalTask.dao.impl.UserDaoBdImpl;
+import by.htp.libraryFinalTask.entity.Autor;
 import by.htp.libraryFinalTask.entity.Book;
 import by.htp.libraryFinalTask.entity.User;
 
@@ -15,6 +18,7 @@ public class LibraryManager {
 	Scanner scaner = new Scanner(System.in);
 	BookDao bookDao = new BookDaoBdImpl();
 	UserDao userDao = new UserDaoBdImpl();
+	AutorDao autorDao = new AutorDaoBdImpl();
 
 	public void showMainMenu() {
 		System.out.println("Enter the item number, please.");
@@ -168,7 +172,13 @@ public class LibraryManager {
 		Book book = new Book(shifrBook, titleBook, shifrAutor, "", "yes");
 
 		bookDao.addBook(book);
-		// update table autors
+		
+		Autor autor = new Autor();
+		autor = autorDao.getAutorByShifr(shifrAutor);
+		if(autor == null) {
+			Autor newAutor = new Autor(nameAutor, surnameAutor, birthdateAutor, shifrAutor);
+			autorDao.addAutor(newAutor);
+		}
 
 		System.out.println("Book was added");
 	}

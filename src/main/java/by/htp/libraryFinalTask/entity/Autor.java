@@ -42,6 +42,14 @@ public class Autor {
 		this.surname = surname;
 	}
 
+	public String getShifrAutor() {
+		return shifrAutor;
+	}
+
+	public void setShifrAutor(String shifrAutor) {
+		this.shifrAutor = shifrAutor;
+	}
+
 	@Override
 	public String toString() {
 		return "Autor [name=" + name + ", surname=" + surname + ", birsdate=" + birsdate + ", shifrAutor=" + shifrAutor + "]";
